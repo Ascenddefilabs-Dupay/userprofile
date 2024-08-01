@@ -9,16 +9,21 @@ class Project(models.Model):
     def __str__(self):
         return self.name
     
-class Users(models.Model):
-    first_name = models.CharField(max_length=50)
-    middle_name = models.CharField(max_length=50, blank=True, null=True)
-    last_name = models.CharField(max_length=50)
-    dob = models.DateField()
+class CustomUser(models.Model):
+    user_id = models.CharField(max_length=8, primary_key=True)
+    user_email = models.EmailField(unique=True)
+    user_first_name = models.CharField(max_length=30)
+    user_middle_name = models.CharField(max_length=30, blank=True)
+    user_last_name = models.CharField(max_length=30)
+    user_dob = models.DateField()
+    user_phone_number = models.BigIntegerField()
+    user_country = models.CharField(max_length=50)
+    user_city = models.CharField(max_length=50)
+    user_profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
+    user_address_line_1 = models.CharField()
+    # user_address_line_2 = models.CharField()
+    user_state= models.CharField()
+    user_pin_code=models.CharField()
 
-    email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=20)
-
-    country = models.CharField(max_length=50)
-    city = models.CharField(max_length=50)
-
-    profile_photo = models.ImageField(upload_to='profile_photos/', blank=True, null=True)
+    class Meta:
+        db_table = 'users'

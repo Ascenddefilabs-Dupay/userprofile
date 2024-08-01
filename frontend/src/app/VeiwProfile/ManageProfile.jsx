@@ -46,7 +46,7 @@ const ManageProfile = () => {
               </li>
               <br></br>
               <li className={styles.navItem}>
-                <Link href="/VeiwProfile">
+                <Link href="/VeiwProfile/User">
                   View Your Profile <FaArrowRight className={styles.arrow} />
                 </Link>
               </li>

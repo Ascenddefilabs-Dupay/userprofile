@@ -1,13 +1,13 @@
 "use client";
 import React from 'react';
-import UserProfile from './UserProfile';
+import ManageProfile from './ManageProfile';
 
-function VeiwProfilePage() {
+function ViewProfilePage() {  // Fixed typo here
   return (
     <div>
-      <UserProfile />
+      <ManageProfile />
     </div>
   );
 }
 
-export default VeiwProfilePage;
+export default ViewProfilePage;  // Fixed typo here

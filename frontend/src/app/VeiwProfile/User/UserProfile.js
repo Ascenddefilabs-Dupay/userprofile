@@ -82,18 +82,35 @@ const UserProfile = () => {
   const [profileImage, setProfileImage] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
-  const userId = 'John'; // Replace with sessionStorage['first_name'] or appropriate user ID retrieval
+  const userId = 'dupC0030'; // Replace with sessionStorage['first_name'] or appropriate user ID retrieval
   const router = useRouter(); // Initialize useRouter
 
   const fetchUserProfile = async () => {
     try {
       const response = await axios.get(`http://localhost:8000/api/profile/${userId}/`);
       setUserProfile(response.data);
-      if (response.data.profile_photo) {
+      console.log('User profile data:', response.data); // Debugging line to check the response data
+
+      if (response.data.user_profile_photo) {
         const baseURL = 'http://localhost:8000/profile_photos';
-        const imageUrl = response.data.profile_photo.startsWith('http')
-          ? response.data.profile_photo
-          : baseURL + response.data.profile_photo;
+        let imageUrl = '';
+
+        // Check if the photo is stored as bytes
+        if (typeof response.data.user_profile_photo === 'string' && response.data.user_profile_photo.startsWith('http')) {
+          imageUrl = response.data.user_profile_photo;
+        } else if (response.data.user_profile_photo && response.data.user_profile_photo.startsWith('/')) {
+          // Handle as a URL path
+          imageUrl = `${baseURL}${response.data.user_profile_photo}`;
+        } else if (response.data.user_profile_photo && response.data.user_profile_photo.data) {
+          // Handle as bytes (convert to base64)
+          const byteArray = new Uint8Array(response.data.user_profile_photo.data);
+          const base64String = btoa(
+            byteArray.reduce((data, byte) => data + String.fromCharCode(byte), '')
+          );
+          imageUrl = `data:image/jpeg;base64,${base64String}`; // Change image/jpeg based on your image type
+          console.log('Base64 Image URL:', imageUrl); // Debugging line to check the base64 URL
+        }
+
         setProfileImage(imageUrl);
       }
     } catch (error) {
@@ -106,7 +123,7 @@ const UserProfile = () => {
   }, []);
 
   const handleImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
+    if (event.target.files && event.target.files[0] && users.user_id) { // Ensure user data is available
       const file = event.target.files[0];
       setSelectedFile(file);
       const reader = new FileReader();
@@ -115,21 +132,28 @@ const UserProfile = () => {
         uploadImage(file);
       };
       reader.readAsDataURL(file);
+    } else {
+      console.error('User data is missing or file is not selected');
     }
   };
 
   const uploadImage = async (file) => {
     const formData = new FormData();
-    formData.append('id', users.id || '');
-    formData.append('profile_photo', file);
-    formData.append('first_name', users.first_name || '');
-    formData.append('middle_name', users.middle_name || '');
-    formData.append('last_name', users.last_name || '');
-    formData.append('dob', users.dob || '');
-    formData.append('email', users.email || '');
-    formData.append('phone_number', users.phone_number || '');
-    formData.append('country', users.country || '');
-    formData.append('city', users.city || '');
+    
+    formData.append('user_id', users.user_id || '');
+    formData.append('user_profile_photo', file);
+    formData.append('user_first_name', users.user_first_name || '');
+    formData.append('user_middle_name', users.user_middle_name || '');
+    formData.append('user_last_name', users.user_last_name || '');
+    formData.append('user_dob', users.user_dob || '');
+    formData.append('user_email', users.user_email || '');
+    formData.append('user_phone_number', users.user_phone_number || '');
+    formData.append('user_country', users.user_country || '');
+    formData.append('user_city', users.user_city || '');  
+    formData.append('user_state', users.user_state ||'');
+    formData.append('user_address_line_1', users.user_address_line_1 || '');
+    formData.append('user_pin_code', users.user_pin_code || '');
+
 
     try {
       const response = await axios.put(`http://localhost:8000/api/profile/${userId}/`, formData, {
@@ -138,7 +162,9 @@ const UserProfile = () => {
         },
       });
       console.log('Profile image updated:', response.data);
-      setOpenDialog(true);
+      setOpenDialog(true); // Open dialog to show success message
+      // Fetch updated profile image
+      fetchUserProfile(); 
     } catch (error) {
       console.error('Error updating profile image:', error.response ? error.response.data : error.message);
     }
@@ -149,11 +175,11 @@ const UserProfile = () => {
   };
 
   const getFullName = () => {
-    return `${users.first_name || ''} ${users.middle_name || ''} ${users.last_name || ''}`.trim();
+    return `${users.user_first_name || ''} ${users.user_middle_name || ''} ${users.user_last_name || ''}`.trim();
   };
 
   const handleManageProfileClick = () => {
-    router.push('/VeiwProfile/Manage'); // Redirect to ManageProfile.js
+    router.push('/VeiwProfile'); // Redirect to ManageProfile.js
   };
 
   return (
@@ -187,7 +213,7 @@ const UserProfile = () => {
           </ProfileImageWrapper>
           <Box>
             <Typography variant="h6" style={{ color: '#B0B0B0' }}>
-              {users.id}
+              {users.user_id}
             </Typography>
           </Box>
         </ProfileWrapper>
@@ -201,31 +227,49 @@ const UserProfile = () => {
           <Grid item xs={12}>
             <InfoRow>
               <LabelTypography>Email:</LabelTypography>
-              <ValueTypography>{users.email}</ValueTypography>
+              <ValueTypography>{users.user_email}</ValueTypography>
             </InfoRow>
           </Grid>
           <Grid item xs={12}>
             <InfoRow>
               <LabelTypography>Dob:</LabelTypography>
-              <ValueTypography>{users.dob}</ValueTypography>
+              <ValueTypography>{users.user_dob}</ValueTypography>
             </InfoRow>
           </Grid>
           <Grid item xs={12}>
             <InfoRow>
               <LabelTypography>Ph Number:</LabelTypography>
-              <ValueTypography>{users.phone_number}</ValueTypography>
+              <ValueTypography>{users.user_phone_number}</ValueTypography>
             </InfoRow>
           </Grid>
           <Grid item xs={12}>
             <InfoRow>
               <LabelTypography>Country:</LabelTypography>
-              <ValueTypography>{users.country}</ValueTypography>
+              <ValueTypography>{users.user_country}</ValueTypography>
             </InfoRow>
           </Grid>
           <Grid item xs={12}>
             <InfoRow>
               <LabelTypography>City:</LabelTypography>
-              <ValueTypography>{users.city}</ValueTypography>
+              <ValueTypography>{users.user_city}</ValueTypography>
+            </InfoRow>
+          </Grid>
+          <Grid item xs={12}>
+            <InfoRow>
+              <LabelTypography>State:</LabelTypography>
+              <ValueTypography>{users.user_state}</ValueTypography>
+            </InfoRow>
+          </Grid>
+          <Grid item xs={12}>
+            <InfoRow>
+              <LabelTypography>Address:</LabelTypography>
+              <ValueTypography>{users.user_address_line_1}</ValueTypography>
+            </InfoRow>
+          </Grid>
+          <Grid item xs={12}>
+            <InfoRow>
+              <LabelTypography>Pincode:</LabelTypography>
+              <ValueTypography>{users.user_pin_code}</ValueTypography>
             </InfoRow>
           </Grid>
         </Grid>
