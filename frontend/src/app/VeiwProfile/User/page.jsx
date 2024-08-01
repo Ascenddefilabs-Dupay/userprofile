@@ -1,11 +1,11 @@
 "use client";
 import React from 'react';
-import ManageProfile from './ManageProfile';
+import UserProfile from './UserProfile';
 
 function VeiwProfilePage() {
   return (
     <div>
-      <ManageProfile />
+      <UserProfile />
     </div>
   );
 }
