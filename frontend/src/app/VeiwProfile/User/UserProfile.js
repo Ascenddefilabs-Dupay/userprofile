@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, Avatar, Button, IconButton, Grid, Box, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Container, Typography, Avatar, IconButton, Grid, Box, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { useRouter } from 'next/navigation';
@@ -16,8 +16,8 @@ const StyledContainer = styled(Container)({
   backgroundColor: '#000000',
   borderRadius: '8px',
   color: '#FFFFFF',
-  width: '350px',
-  height: '600px',
+  width: '360px',
+  height: '750px', // Adjust height for additional content
 });
 
 const ProfileWrapper = styled(Box)({
@@ -66,7 +66,6 @@ const InfoRow = styled(Box)({
 });
 
 const StyledButton = styled(Button)({
-  marginTop: '1rem',
   backgroundColor: '#333',
   color: '#FFFFFF',
   borderRadius: '16px',
@@ -77,12 +76,22 @@ const StyledButton = styled(Button)({
   },
 });
 
+const ButtonWrapper = styled(Box)({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '1rem',
+});
+
+const SuccessMessage = styled(Typography)({
+  color: '#2196F3', // Blue color for success message
+  marginTop: '1rem',
+});
+
 const UserProfile = () => {
   const [users, setUserProfile] = useState({});
   const [profileImage, setProfileImage] = useState('');
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [openDialog, setOpenDialog] = useState(false);
-  const userId = 'dupC0030'; // Replace with sessionStorage['first_name'] or appropriate user ID retrieval
+  const [successMessage, setSuccessMessage] = useState('');
+  const userId = 'dupC0029'; // Replace with sessionStorage['first_name'] or appropriate user ID retrieval
   const router = useRouter(); // Initialize useRouter
 
   const fetchUserProfile = async () => {
@@ -125,7 +134,6 @@ const UserProfile = () => {
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0] && users.user_id) { // Ensure user data is available
       const file = event.target.files[0];
-      setSelectedFile(file);
       const reader = new FileReader();
       reader.onload = (e) => {
         setProfileImage(e.target.result);
@@ -154,24 +162,18 @@ const UserProfile = () => {
     formData.append('user_address_line_1', users.user_address_line_1 || '');
     formData.append('user_pin_code', users.user_pin_code || '');
 
-
     try {
-      const response = await axios.put(`http://localhost:8000/api/profile/${userId}/`, formData, {
+      await axios.put(`http://localhost:8000/api/profile/${userId}/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('Profile image updated:', response.data);
-      setOpenDialog(true); // Open dialog to show success message
-      // Fetch updated profile image
+      setSuccessMessage('Profile image updated successfully!');
       fetchUserProfile(); 
     } catch (error) {
       console.error('Error updating profile image:', error.response ? error.response.data : error.message);
+      setSuccessMessage('Failed to update profile image.');
     }
-  };
-
-  const handleDialogClose = () => {
-    setOpenDialog(false);
   };
 
   const getFullName = () => {
@@ -268,26 +270,24 @@ const UserProfile = () => {
           </Grid>
           <Grid item xs={12}>
             <InfoRow>
-              <LabelTypography>Pincode:</LabelTypography>
+              <LabelTypography>Pin Code:</LabelTypography>
               <ValueTypography>{users.user_pin_code}</ValueTypography>
             </InfoRow>
           </Grid>
+          <Grid item xs={12}>
+            <ButtonWrapper>
+              <StyledButton onClick={handleManageProfileClick}>
+                Manage Profile
+              </StyledButton>
+            </ButtonWrapper>
+          </Grid>
+          {successMessage && (
+            <Grid item xs={12}>
+              <SuccessMessage>{successMessage}</SuccessMessage>
+            </Grid>
+          )}
         </Grid>
-        <Box display="flex" justifyContent="center" mt={2}>
-          <StyledButton variant="contained" onClick={handleManageProfileClick}>Manage Profile</StyledButton>
-        </Box>
       </StyledContainer>
-      <Dialog open={openDialog} onClose={handleDialogClose}>
-        <DialogTitle>Profile Updated</DialogTitle>
-        <DialogContent>
-          <Typography>Your profile image has been updated successfully!</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose} color="primary">
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
     </Container>
   );
 };
