@@ -1,11 +1,11 @@
 "use client";
 import React from 'react';
-import UserProfile from './UserProfile';
+import ViewProfile from './ViewProfile';
 
 function VeiwProfilePage() {
   return (
     <div>
-      <UserProfile />
+      <ViewProfile />
     </div>
   );
 }
