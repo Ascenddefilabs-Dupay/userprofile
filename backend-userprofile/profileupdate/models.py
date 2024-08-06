@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Project(models.Model):
@@ -19,7 +20,7 @@ class CustomUser(models.Model):
     user_phone_number = models.BigIntegerField()
     user_country = models.CharField(max_length=50)
     user_city = models.CharField(max_length=50)
-    user_profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
+    user_profile_photo = models.FileField(upload_to='profile_photos/', null=True, blank=True)
     user_address_line_1 = models.CharField()
     # user_address_line_2 = models.CharField()
     user_state= models.CharField()

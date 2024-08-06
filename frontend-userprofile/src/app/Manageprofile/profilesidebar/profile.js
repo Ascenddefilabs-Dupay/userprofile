@@ -65,6 +65,10 @@ const UserProfile = () => {
     }
   };
 
+  const handleViewProfileClick = () => {
+    router.push('/Manageprofile/ViewProfile'); // Redirect to ManageProfile.js
+  };
+
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.sidebarContainer}>
@@ -85,31 +89,13 @@ const UserProfile = () => {
             </Box>
           </ProfileWrapper>
           <div className={styles.buttonContainer}>
-            <button className={styles.viewProfileButton}>View profile</button>
+            <button onClick={handleViewProfileClick}>View profile</button>
           </div>
           <div className={styles.menuItem}>
             <span>Recovery phrase</span>
             <span
               className={styles.menuLink}
               onClick={() => router.push('/Manageprofile/profilesidebar/RecoveryPhrase')}
-            >
-              &gt;
-            </span>
-          </div>
-          <div className={styles.menuItem}>
-            <span>Connected dapps</span>
-            <span
-              className={styles.menuLink}
-              onClick={() => router.push('/Manageprofile/profilesidebar/Dapp')}
-            >
-              &gt;
-            </span>
-          </div>
-          <div className={styles.menuItem}>
-            <span>Export public addresses</span>
-            <span
-              className={styles.menuLink}
-              onClick={() => router.push('/Manageprofile/profilesidebar/Exportpublic')}
             >
               &gt;
             </span>
@@ -123,15 +109,7 @@ const UserProfile = () => {
               &gt;
             </span>
           </div>
-          <div className={styles.menuItem}>
-            <span>Token allowances</span>
-            <span
-              className={styles.menuLink}
-              onClick={() => router.push('/Manageprofile/profilesidebar/Tokenallowence')}
-            >
-              &gt;
-            </span>
-          </div>
+
           <div className={styles.menuItem}>
             <span>Hide Assets</span>
             <span
