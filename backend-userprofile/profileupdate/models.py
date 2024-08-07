@@ -25,6 +25,7 @@ class CustomUser(models.Model):
     # user_address_line_2 = models.CharField()
     user_state= models.CharField()
     user_pin_code=models.CharField()
-
+    profile_privacy = models.CharField(max_length=10, choices=[('public', 'Public'), ('private', 'Private')], default='public')
+    
     class Meta:
         db_table = 'users'

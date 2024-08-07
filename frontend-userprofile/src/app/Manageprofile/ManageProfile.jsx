@@ -1,74 +1,128 @@
-// pages/ManageProfile.js
 "use client";
 
 import Link from 'next/link';
-import styles from './ManageProfile.module.css'; // Ensure this path is correct
-import { FaArrowRight, FaClock, FaFileAlt, FaCog } from 'react-icons/fa';
-import { Container } from '@mui/material';
+import { FaArrowLeft, FaClock, FaFileAlt, FaCog } from 'react-icons/fa';
+import { Container, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 
 const StyledContainer = styled(Container)({
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
-  marginTop: '2rem',
+  alignItems: 'flex-start',
   padding: '1rem',
   backgroundColor: '#000000',
   borderRadius: '8px',
   color: '#FFFFFF',
-  width: '350px',
-  height: '600px',
+  width:'320px',
+  height:'550px' // Adjust height for additional content
 });
+
+const Header = styled('header')({
+  display: 'flex',
+  alignItems: 'center',
+  width: '100%',
+  marginBottom: '1rem',
+});
+
+const BackArrow = styled(FaArrowLeft)({
+  cursor: 'pointer',
+  color: '#FFFFFF',
+  fontSize: '1.0rem', // Adjust size as needed
+  marginRight: '1rem', // Adjust spacing from the text
+});
+const MenuTitle = styled(Typography)({
+  fontSize: '1.3rem',
+  color: '#FFFFFF',
+});
+
+const Nav = styled('nav')({
+  width: '100%',
+});
+
+const NavList = styled('ul')({
+  listStyleType: 'none',
+  padding: 0,
+  margin: 0,
+});
+
+const NavItem = styled('li')({
+  margin: '2.5rem 0',
+});
+
+const NavLink = styled(Link)({
+  color: '#FFFFFF',
+  textDecoration: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  '&:hover': {
+   
+  },
+});
+const Arrow = styled('span')({
+  marginLeft: 'auto',
+  color: '#9E9E9E',
+  fontSize: '1rem',
+});
+
+
+const Footer = styled('footer')({
+  display: 'flex',
+  justifyContent: 'space-between',
+  width: '100%',
+  marginTop: 'auto',
+});
+
+const FooterItem = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  color: '#FFFFFF',
+  cursor: 'pointer',
+});
+
 const ManageProfile = () => {
   return (
-    <Container maxWidth="md">
-      <StyledContainer>
-        <div className={styles.menu}>
-          <header className={styles.header}>
-            <Link href="/VeiwProfile">
-              <div className={styles.backArrow}>←</div>
-            </Link>
-            <h2>Manage Profile</h2>
-          </header>
-          <br></br>
-          <nav>
-            <ul className={styles.nav}>
-              <li className={styles.navItem}>
-                <Link href="/edit-profile-details">
-                  Edit Profile Details <FaArrowRight className={styles.arrow} />
-                </Link>
-              </li>
-              <br></br>
-              <li className={styles.navItem}>
-                <Link href="/manage-privacy">
-                  Manage Privacy <FaArrowRight className={styles.arrow} />
-                </Link>
-              </li>
-              <br></br>
-              <li className={styles.navItem}>
-                <Link href="/Manageprofile/ViewProfile">
-                  View Your Profile <FaArrowRight className={styles.arrow} />
-                </Link>
-              </li>
-            </ul>
-          </nav>
-          <footer className={styles.footer}>
-            <div className={styles.footerItem}>
-              <FaClock />
-              <span>Assets</span>
-            </div>
-            <div className={styles.footerItem}>
-              <FaFileAlt />
-              <span>Transactions</span>
-            </div>
-            <div className={`${styles.footerItem}`}>
-              <FaCog />
-              <span>Settings</span>
-            </div>
-          </footer>
-        </div>
-        </StyledContainer>
-    </Container>
+    <StyledContainer maxWidth="md">
+      <Header>
+        <Link href="/VeiwProfile">
+          <BackArrow />
+        </Link>
+        <MenuTitle>Manage Profile</MenuTitle>
+      </Header>
+      <Nav>
+        <NavList>
+          <NavItem>
+            <NavLink href="/Manageprofile/EditProfile">
+              Edit Profile Details <Arrow> &gt; </Arrow>
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/Manageprofile/ManagePrivacy">
+              Manage Privacy <Arrow> &gt; </Arrow>
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/Manageprofile/ViewProfile">
+              View Your Profile <Arrow> &gt; </Arrow>
+            </NavLink>
+          </NavItem>
+        </NavList>
+      </Nav>
+      <Footer>
+        <FooterItem>
+          <FaClock />
+          <span>Assets</span>
+        </FooterItem>
+        <FooterItem>
+          <FaFileAlt />
+          <span>Transactions</span>
+        </FooterItem>
+        <FooterItem>
+          <FaCog />
+          <span>Settings</span>
+        </FooterItem>
+      </Footer>
+    </StyledContainer>
   );
 };
 

@@ -6,9 +6,62 @@ import { Container, Typography, Avatar, IconButton, Grid, Box, Button } from '@m
 import { styled } from '@mui/system';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { useRouter } from 'next/navigation';
-import {FaArrowLeft, FaClock, FaFileAlt, FaCog } from 'react-icons/fa';
 import Link from 'next/link';
+import {FaArrowLeft, FaClock, FaFileAlt, FaCog } from 'react-icons/fa';
 
+const styles = {
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        width: '100%',
+        marginBottom: '1rem', // Adjusted for spacing
+    },
+    backArrow: {
+        cursor: 'pointer',
+        color: '#FFFFFF',
+        fontSize: '1.5rem', // Increase the size of the arrow
+    },
+    manage: {
+        fontSize: '1.3rem',
+        color: '#FFFFFF',
+        marginLeft: '1px', // Ensure it starts from the left with some margin
+    },
+    
+    recommended: {
+        color: '#1E88E5',
+        fontSize: '0.75rem',
+        marginLeft: '1px',
+    },
+    description: {
+        color: '#9E9E9E', // Set the desired text color here
+        marginLeft: '0.75px',
+        fontSize: '0.75rem',
+    },
+    user: {
+        color: 'white', // Set the desired text color here
+        marginLeft: '1.5px',
+        fontSize: '0.95rem',
+    },
+    addr: {
+        color: '#B0B0B0', // Set the desired text color here
+        marginLeft: '1.5px',
+        fontSize: '0.75rem',
+    },
+    footer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        margintop: 'auto',
+        width: '100%',
+
+    },
+    footerItem: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        cursor: 'pointer',
+        color: '#FFFFFF', // Text color for the footer items
+    },
+};
 
 const StyledContainer = styled(Container)({
   display: 'flex',
@@ -18,10 +71,8 @@ const StyledContainer = styled(Container)({
   backgroundColor: '#000000',
   borderRadius: '8px',
   color: '#FFFFFF',
-  width: '320px',
-  height: '550px', // Adjust height for additional content
-  overflowY: 'auto',  // Adjust height for additional content
-  scrollbarWidth: 'none', // For Firefox
+  width:'320px',
+  height:'550px' // Adjust height for additional content
 });
 
 
@@ -32,12 +83,13 @@ const ProfileWrapper = styled(Box)({
   width: '100%',
   paddingBottom: '1rem',
   borderBottom: '1px solid #333',
+  cursor: 'pointer',
 });
 
 const ProfileImageWrapper = styled(Box)({
   position: 'relative',
-  width: 60,
-  height: 60,
+  width: 50,
+  height: 50,
   marginRight: '1rem',
 });
 
@@ -96,6 +148,8 @@ const SuccessMessage = styled(Typography)({
 const UserProfile = () => {
   const [users, setUserProfile] = useState({});
   const [profileImage, setProfileImage] = useState('');
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const userId = 'dupC0029'; // Replace with sessionStorage['first_name'] or appropriate user ID retrieval
   const router = useRouter(); // Initialize useRouter
@@ -104,6 +158,8 @@ const UserProfile = () => {
     try {
       const response = await axios.get(`http://localhost:8000/api/profile/${userId}/`);
       setUserProfile(response.data);
+      setName(response.data.name || '');
+      setAddress(response.data.address || '');
       console.log('User profile data:', response.data); // Debugging line to check the response data
 
       if (response.data.user_profile_photo) {
@@ -156,18 +212,6 @@ const UserProfile = () => {
     
     formData.append('user_id', users.user_id || '');
     formData.append('user_profile_photo', file);
-    formData.append('user_first_name', users.user_first_name || '');
-    formData.append('user_middle_name', users.user_middle_name || '');
-    formData.append('user_last_name', users.user_last_name || '');
-    formData.append('user_dob', users.user_dob || '');
-    formData.append('user_email', users.user_email || '');
-    formData.append('user_phone_number', users.user_phone_number || '');
-    formData.append('user_country', users.user_country || '');
-    formData.append('user_city', users.user_city || '');  
-    formData.append('user_state', users.user_state ||'');
-    formData.append('user_address_line_1', users.user_address_line_1 || '');
-    formData.append('user_pin_code', users.user_pin_code || '');
-
     try {
       await axios.put(`http://localhost:8000/api/profile/${userId}/`, formData, {
         headers: {
@@ -182,30 +226,33 @@ const UserProfile = () => {
     }
   };
 
-  const getFullName = () => {
-    return `${users.user_first_name || ''} ${users.user_middle_name || ''} ${users.user_last_name || ''}`.trim();
-  };
 
   const handleManageProfileClick = () => {
-    router.push('/Manageprofile'); // Redirect to ManageProfile.js
+    router.push('/EditProfile'); // Redirect to ManageProfile.js
   };
- 
-  const Header = styled('header')({
-    display: 'flex',
-    alignItems: 'center',
-    width: '100%',
-    marginBottom: '1rem',
+
+  const BackArrow = styled(FaArrowLeft)({
+    cursor: 'pointer',
+    color: '#FFFFFF',
+    fontSize: '1.0rem', // Adjust size as needed
+    marginRight: '1rem', // Adjust spacing from the text
   });
   
   return (
     <Container maxWidth="md">
       <StyledContainer>
-        <Box display="flex" justifyContent="flex-start" width="100%">
-          <Typography variant="h5" gutterBottom>
-            My Profile
-          </Typography>
-        </Box>
-        <ProfileWrapper>
+        <header style={styles.header}>
+            <Link href="/Manageprofile">
+              <BackArrow />
+
+            </Link>
+        </header>
+            <Typography variant="h6" style={styles.manage}>Edit profile details</Typography>
+            <Typography variant="body1" style={{ ...styles.description, marginLeft: '1px' }} gutterBottom>
+                Your profile is private. You can make it public in <span style={styles.recommended}>Manage privacy</span>. All feilds are optional.
+
+            </Typography>
+        <ProfileWrapper >
           <ProfileImageWrapper>
             <ProfileImage src={profileImage} alt="Profile Image" />
             <label htmlFor="upload-image">
@@ -216,10 +263,12 @@ const UserProfile = () => {
                 component="span"
                 style={{
                   position: 'absolute',
-                  bottom: -10,
-                  right: -10,
+                  bottom: 0,
+                  right: -15,
                   backgroundColor: '#FFFFFF',
                   borderRadius: '50%',
+                  width:30,
+                  height:30
                 }}
               >
                 <PhotoCamera style={{ color: 'gray' }} />
@@ -227,79 +276,13 @@ const UserProfile = () => {
             </label>
           </ProfileImageWrapper>
           <Box>
-            <Typography variant="h6" style={{ color: '#B0B0B0' }}>
+            <Typography variant="h6" style={styles.user}>
               {users.user_id}
             </Typography>
+            
           </Box>
         </ProfileWrapper>
-        <Grid container spacing={1} mt={2}>
-          <Grid item xs={12}>
-            <InfoRow>
-              <LabelTypography>Full Name:</LabelTypography>
-              <ValueTypography>{getFullName()}</ValueTypography>
-            </InfoRow>
-          </Grid>
-          <Grid item xs={12}>
-            <InfoRow>
-              <LabelTypography>Email:</LabelTypography>
-              <ValueTypography>{users.user_email}</ValueTypography>
-            </InfoRow>
-          </Grid>
-          <Grid item xs={12}>
-            <InfoRow>
-              <LabelTypography>Dob:</LabelTypography>
-              <ValueTypography>{users.user_dob}</ValueTypography>
-            </InfoRow>
-          </Grid>
-          <Grid item xs={12}>
-            <InfoRow>
-              <LabelTypography>Ph Number:</LabelTypography>
-              <ValueTypography>{users.user_phone_number}</ValueTypography>
-            </InfoRow>
-          </Grid>
-          <Grid item xs={12}>
-            <InfoRow>
-              <LabelTypography>Country:</LabelTypography>
-              <ValueTypography>{users.user_country}</ValueTypography>
-            </InfoRow>
-          </Grid>
-          <Grid item xs={12}>
-            <InfoRow>
-              <LabelTypography>City:</LabelTypography>
-              <ValueTypography>{users.user_city}</ValueTypography>
-            </InfoRow>
-          </Grid>
-          <Grid item xs={12}>
-            <InfoRow>
-              <LabelTypography>State:</LabelTypography>
-              <ValueTypography>{users.user_state}</ValueTypography>
-            </InfoRow>
-          </Grid>
-          <Grid item xs={12}>
-            <InfoRow>
-              <LabelTypography>Address:</LabelTypography>
-              <ValueTypography>{users.user_address_line_1}</ValueTypography>
-            </InfoRow>
-          </Grid>
-          <Grid item xs={12}>
-            <InfoRow>
-              <LabelTypography>Pin Code:</LabelTypography>
-              <ValueTypography>{users.user_pin_code}</ValueTypography>
-            </InfoRow>
-          </Grid>
-          <Grid item xs={12}>
-            <ButtonWrapper>
-              <StyledButton onClick={handleManageProfileClick}>
-                Manage Profile
-              </StyledButton>
-            </ButtonWrapper>
-          </Grid>
-          {successMessage && (
-            <Grid item xs={12}>
-              <SuccessMessage>{successMessage}</SuccessMessage>
-            </Grid>
-          )}
-        </Grid>
+        
       </StyledContainer>
     </Container>
   );
