@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { IconButton, Switch, Typography, Box } from '@mui/material';
-import { ArrowBack, Circle, Info } from '@mui/icons-material';
+import { ArrowForwardIos, Circle, Info } from '@mui/icons-material';
 import { styled } from '@mui/system';
-import { useRouter } from 'next/navigation'; // Import the correct useRouter
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import styles from './ProfileSidebar.module.css';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const ProfileWrapper = styled(Box)({
   display: 'flex',
@@ -31,8 +32,8 @@ const ProfileImage = styled('img')({
 const UserProfile = () => {
   const [user, setUserProfile] = useState({});
   const [profileImage, setProfileImage] = useState('');
-  const router = useRouter(); // Use router from next/navigation
-  const userId = 'dupC0029'; // Replace with sessionStorage['first_name'] or appropriate user ID retrieval
+  const router = useRouter();
+  const userId = 'dupC0029';
 
   useEffect(() => {
     fetchUserProfile();
@@ -66,15 +67,15 @@ const UserProfile = () => {
   };
 
   const handleViewProfileClick = () => {
-    router.push('/Manageprofile/ViewProfile'); // Redirect to ManageProfile.js
+    router.push('/Manageprofile/ViewProfile');
   };
 
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.sidebarContainer}>
         <div className={styles.header}>
-          <IconButton>
-            <ArrowBack className={styles.backIcon} />
+          <IconButton color="inherit" href="/Manageprofile/profilesidebar" className={styles.backButton}>
+            <FaArrowLeft />
           </IconButton>
         </div>
         <div className={styles.menuList}>
@@ -93,36 +94,34 @@ const UserProfile = () => {
           </div>
           <div className={styles.menuItem}>
             <span>Recovery phrase</span>
-            <span
+            <ArrowForwardIos
               className={styles.menuLink}
+              style={{ fontSize: '1rem' }}
               onClick={() => router.push('/Manageprofile/profilesidebar/RecoveryPhrase')}
-            >
-              &gt;
-            </span>
+            />
           </div>
           <div className={styles.menuItem}>
             <span>Show private key</span>
-            <span
+            <ArrowForwardIos
               className={styles.menuLink}
+              style={{ fontSize: '1rem' }}
               onClick={() => router.push('/Manageprofile/profilesidebar/Privacykey')}
-            >
-              &gt;
-            </span>
+            />
           </div>
-
           <div className={styles.menuItem}>
             <span>Hide Assets</span>
-            <span
+            <ArrowForwardIos
               className={styles.menuLink}
+              style={{ fontSize: '1rem' }}
               onClick={() => router.push('/Manageprofile/profilesidebar/Hideassets')}
-            >
-              &gt;
-            </span>
+            />
           </div>
           <div className={styles.menuItem}>
             <span>Color</span>
-            <Circle className={styles.colorCircle} 
-            onClick={() => router.push('/Manageprofile/profilesidebar/Themecolour')} />
+            <Circle
+              className={styles.colorCircle}
+              onClick={() => router.push('/Manageprofile/profilesidebar/Themecolour')}
+            />
           </div>
           <div className={styles.menuItem}>
             <span>Hide address</span>
@@ -132,9 +131,7 @@ const UserProfile = () => {
             </div>
           </div>
         </div>
-        <div className={styles.footer}>
-          
-        </div>
+        <div className={styles.footer}></div>
       </div>
     </div>
   );
