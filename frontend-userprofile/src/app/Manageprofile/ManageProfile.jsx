@@ -58,7 +58,7 @@ const NavLink = styled(Link)({
    
   },
 });
-const Arrow = styled('span')({
+const Arrow = styled('ArrowForwardIos')({
   marginLeft: 'auto',
   color: '#9E9E9E',
   fontSize: '1rem',
@@ -93,35 +93,22 @@ const ManageProfile = () => {
         <NavList>
           <NavItem>
             <NavLink href="/Manageprofile/EditProfile">
-              Edit Profile Details <Arrow> &gt; </Arrow>
+              Edit Profile Details <Arrow/> 
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink href="/Manageprofile/ManagePrivacy">
-              Manage Privacy <Arrow> &gt; </Arrow>
+              Manage Privacy <Arrow />
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink href="/Manageprofile/ViewProfile">
-              View Your Profile <Arrow> &gt; </Arrow>
+              View Your Profile <Arrow /> 
             </NavLink>
           </NavItem>
         </NavList>
       </Nav>
-      <Footer>
-        <FooterItem>
-          <FaClock />
-          <span>Assets</span>
-        </FooterItem>
-        <FooterItem>
-          <FaFileAlt />
-          <span>Transactions</span>
-        </FooterItem>
-        <FooterItem>
-          <FaCog />
-          <span>Settings</span>
-        </FooterItem>
-      </Footer>
+      
     </StyledContainer>
   );
 };

@@ -143,6 +143,12 @@ const ManagePrivacy = () => {
 
     return (
         <StyledContainer>
+            <header style={styles.header}>
+                <Link href="/Manageprofile">
+                <BackArrow />
+
+                </Link>
+            </header>
             <Box display="flex" justifyContent="flex-start" width="100%">
                 <Typography variant="h5" gutterBottom>
                     Manage Privacy
