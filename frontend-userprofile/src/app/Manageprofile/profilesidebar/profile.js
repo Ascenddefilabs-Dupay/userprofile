@@ -65,6 +65,11 @@ const UserProfile = () => {
     }
   };
 
+  const profilehandleBackClick = () => {
+    let redirectUrl = 'http://localhost:3003/Dashboard/Settings';
+    router.push(redirectUrl);
+  };
+
   const handleViewProfileClick = () => {
     router.push('/Manageprofile/ViewProfile'); // Redirect to ManageProfile.js
   };
@@ -74,7 +79,7 @@ const UserProfile = () => {
       <div className={styles.sidebarContainer}>
         <div className={styles.header}>
           <IconButton>
-            <ArrowBack className={styles.backIcon} />
+            <ArrowBack className={styles.backIcon} onClick={profilehandleBackClick} />
           </IconButton>
         </div>
         <div className={styles.menuList}>

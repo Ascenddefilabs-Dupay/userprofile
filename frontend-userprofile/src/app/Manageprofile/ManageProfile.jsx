@@ -79,13 +79,16 @@ const FooterItem = styled('div')({
   color: '#FFFFFF',
   cursor: 'pointer',
 });
+const handleLeftArrowClick = () => {
+  window.location.href = 'http://localhost:3003/Dashboard';
+};
 
 const ManageProfile = () => {
   return (
     <StyledContainer maxWidth="md">
       <Header>
         <Link href="/VeiwProfile">
-          <BackArrow />
+          <BackArrow onClick={handleLeftArrowClick}/>
         </Link>
         <MenuTitle>Manage Profile</MenuTitle>
       </Header>
