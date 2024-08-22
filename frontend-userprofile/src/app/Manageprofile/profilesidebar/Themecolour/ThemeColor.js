@@ -13,9 +13,10 @@ const ThemeColor = () => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
 
   return (
+    <div className={styles.pageWrapper}>
     <div className={styles.container}>
       <div className={styles.header}>
-        <Link href="/Manageprofile/profilesidebar">
+        <Link href="/ManageProfile/ProfileSidebar">
           <FaArrowLeft className={styles.backArrow} />
         </Link>
         <br></br>
@@ -54,6 +55,7 @@ const ThemeColor = () => {
         <div className={styles.footerButton}>Transactions</div>
         <div className={styles.footerButton}>Settings</div> */}
       </div>
+    </div>
     </div>
   );
 };

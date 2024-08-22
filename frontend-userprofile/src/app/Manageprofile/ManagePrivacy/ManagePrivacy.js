@@ -17,10 +17,12 @@ const StyledContainer = styled(Container)({
     backgroundColor: '#000000',
     borderRadius: '8px',
     color: '#FFFFFF',
-    width: '320px',
-    height: '550px', // Adjust height for additional content
+    width: '428px',
+    height:'auto', // Adjust height for additional content
+    minHeight: '100vh' ,
     overflowY: 'auto',  // Adjust height for additional content
     scrollbarWidth: 'none', // For Firefox
+    padding:'20px',
 });
 
 const styles = {
@@ -142,9 +144,10 @@ const ManagePrivacy = () => {
     const handleError = () => setError(false);
 
     return (
+        <div className={styles.pageWrapper}>
         <StyledContainer>
             <header style={styles.header}>
-                <Link href="/Manageprofile">
+                <Link href="/ManageProfile">
                 <BackArrow />
 
                 </Link>
@@ -207,6 +210,7 @@ const ManagePrivacy = () => {
                 </Box>
             </Modal>
         </StyledContainer>
+        </div>
     );
 };
 

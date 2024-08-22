@@ -106,9 +106,9 @@ DATABASES = {
 }
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'ds310f9hg',
-    'API_KEY': '247315982122596',
-    'API_SECRET': 'ihFtLaq4IHFMhBDqTWvVAMvzAik'
+    'CLOUD_NAME': 'dgfv6j82t',
+    'API_KEY': '235116669118225',
+    'API_SECRET': 'zRMrcJ0xAtw8sI_xV3v3GGx_0es'
 }
 
 

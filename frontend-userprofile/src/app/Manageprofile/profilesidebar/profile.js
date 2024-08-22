@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { IconButton, Switch, Typography, Box } from '@mui/material';
-import { ArrowBack, Circle, Info } from '@mui/icons-material';
+import { ArrowForwardIos, Circle, Info } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import { useRouter } from 'next/navigation'; // Import the correct useRouter
 import axios from 'axios';
 import styles from './ProfileSidebar.module.css';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const ProfileWrapper = styled(Box)({
   display: 'flex',
@@ -32,7 +33,7 @@ const UserProfile = () => {
   const [user, setUserProfile] = useState({});
   const [profileImage, setProfileImage] = useState('');
   const router = useRouter(); // Use router from next/navigation
-  const userId = 'dupC0029'; // Replace with sessionStorage['first_name'] or appropriate user ID retrieval
+  const userId = 'dupC0025'; // Replace with sessionStorage['first_name'] or appropriate user ID retrieval
 
   useEffect(() => {
     fetchUserProfile();
@@ -66,21 +67,24 @@ const UserProfile = () => {
   };
 
   const profilehandleBackClick = () => {
-    let redirectUrl = 'http://localhost:3003/Crypto_Wallet/Dashboard/Settings';
+    let redirectUrl = 'http://localhost:3003/Dashboard/Settings';
     router.push(redirectUrl);
   };
 
   const handleViewProfileClick = () => {
-    router.push('/Manageprofile/ViewProfile'); // Redirect to ManageProfile.js
+    router.push('/ManageProfile/ViewProfile');// Redirect to ManageProfile.js
   };
 
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.sidebarContainer}>
         <div className={styles.header}>
-          <IconButton>
-            <ArrowBack className={styles.backIcon} onClick={profilehandleBackClick} />
+          <IconButton color="inherit" href="/ManageProfile/ProfileSidebar" className={styles.backButton}>
+            <FaArrowLeft style={{position: 'relative' ,right:'10px'}} onClick={profilehandleBackClick}/>   <label className={styles.header1}> ProfileSidebar</label>
           </IconButton>
+          {/* <IconButton>
+            <ArrowBack className={styles.backIcon} onClick={profilehandleBackClick} />
+          </IconButton> */}
         </div>
         <div className={styles.menuList}>
           <ProfileWrapper>
@@ -94,40 +98,39 @@ const UserProfile = () => {
             </Box>
           </ProfileWrapper>
           <div className={styles.buttonContainer}>
-            <button onClick={handleViewProfileClick}>View profile</button>
+            <button onClick={handleViewProfileClick} style={{ width: '100%' }}>View profile</button>
           </div>
           <div className={styles.menuItem}>
             <span>Recovery phrase</span>
-            <span
+            <ArrowForwardIos
               className={styles.menuLink}
-              onClick={() => router.push('/Manageprofile/profilesidebar/RecoveryPhrase')}
-            >
-              &gt;
-            </span>
+              style={{ fontSize: '1rem' }}
+              onClick={() => router.push('/ManageProfile/ProfileSidebar/RecoveryPhrase')}
+            />
           </div>
           <div className={styles.menuItem}>
             <span>Show private key</span>
-            <span
+            <ArrowForwardIos
               className={styles.menuLink}
-              onClick={() => router.push('/Manageprofile/profilesidebar/Privacykey')}
-            >
-              &gt;
-            </span>
+              style={{ fontSize: '1rem' }}
+              onClick={() => router.push('/ManageProfile/ProfileSidebar/PrivacyKey')}
+            />
           </div>
 
           <div className={styles.menuItem}>
             <span>Hide Assets</span>
-            <span
+            <ArrowForwardIos
               className={styles.menuLink}
-              onClick={() => router.push('/Manageprofile/profilesidebar/Hideassets')}
-            >
-              &gt;
-            </span>
+              style={{ fontSize: '1rem' }}
+              onClick={() => router.push('/ManageProfile/ProfileSidebar/HideAssets')}
+            />
           </div>
           <div className={styles.menuItem}>
             <span>Color</span>
-            <Circle className={styles.colorCircle} 
-            onClick={() => router.push('/Manageprofile/profilesidebar/Themecolour')} />
+            <Circle
+              className={styles.colorCircle}
+              onClick={() => router.push('/ManageProfile/ProfileSidebar/ThemeColour')}
+            />
           </div>
           <div className={styles.menuItem}>
             <span>Hide address</span>
@@ -137,9 +140,7 @@ const UserProfile = () => {
             </div>
           </div>
         </div>
-        <div className={styles.footer}>
-          
-        </div>
+          <div className={styles.footer}></div>
       </div>
     </div>
   );

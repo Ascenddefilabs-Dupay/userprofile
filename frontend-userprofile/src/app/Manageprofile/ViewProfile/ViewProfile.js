@@ -18,10 +18,12 @@ const StyledContainer = styled(Container)({
   backgroundColor: '#000000',
   borderRadius: '8px',
   color: '#FFFFFF',
-  width: '320px',
-  height: '550px', // Adjust height for additional content
+  width: '428px',
+  height: 'auto',
+  minHeight:'100vh' ,// Adjust height for additional content
   overflowY: 'auto',  // Adjust height for additional content
   scrollbarWidth: 'none', // For Firefox
+  padding:'20px',
 });
 
 
@@ -186,9 +188,6 @@ const UserProfile = () => {
     return `${users.user_first_name || ''} ${users.user_middle_name || ''} ${users.user_last_name || ''}`.trim();
   };
 
-  const handleManageProfileClick = () => {
-    router.push('/Manageprofile'); // Redirect to ManageProfile.js
-  };
  
   const Header = styled('header')({
     display: 'flex',
@@ -196,15 +195,37 @@ const UserProfile = () => {
     width: '100%',
     marginBottom: '1rem',
   });
-  
+  const styles = {
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        width: '100%',
+        marginBottom: '1rem', // Adjusted for spacing
+    },
+  }
+  const BackArrow = styled(FaArrowLeft)({
+    cursor: 'pointer',
+    color: '#FFFFFF',
+    fontSize: '1.0rem', // Adjust size as needed
+    marginRight: '1rem', // Adjust spacing from the text
+  });
+
   return (
+    <div className={styles.pageWrapper}>
     <Container maxWidth="md">
       <StyledContainer>
-        <Box display="flex" justifyContent="flex-start" width="100%">
-          <Typography variant="h5" gutterBottom>
-            My Profile
-          </Typography>
-        </Box>
+          <header style={styles.header}>
+                <Link href="/ManageProfile">
+                <BackArrow />
+
+                </Link>
+                <Box display="flex" justifyContent="flex-start" width="100%">
+                  <Typography variant="h5" gutterBottom>
+                    My Profile
+                  </Typography>
+                </Box>
+            </header>
+        
         <ProfileWrapper>
           <ProfileImageWrapper>
             <ProfileImage src={profileImage} alt="Profile Image" />
@@ -287,13 +308,6 @@ const UserProfile = () => {
               <ValueTypography>{users.user_pin_code}</ValueTypography>
             </InfoRow>
           </Grid>
-          <Grid item xs={12}>
-            <ButtonWrapper>
-              <StyledButton onClick={handleManageProfileClick}>
-                Manage Profile
-              </StyledButton>
-            </ButtonWrapper>
-          </Grid>
           {successMessage && (
             <Grid item xs={12}>
               <SuccessMessage>{successMessage}</SuccessMessage>
@@ -302,6 +316,7 @@ const UserProfile = () => {
         </Grid>
       </StyledContainer>
     </Container>
+    </div>
   );
 };
 
