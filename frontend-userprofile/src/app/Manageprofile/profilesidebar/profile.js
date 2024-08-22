@@ -66,7 +66,7 @@ const UserProfile = () => {
   };
 
   const profilehandleBackClick = () => {
-    let redirectUrl = 'http://localhost:3003/Dashboard/Settings';
+    let redirectUrl = 'http://localhost:3003/Crypto_Wallet/Dashboard/Settings';
     router.push(redirectUrl);
   };
 
