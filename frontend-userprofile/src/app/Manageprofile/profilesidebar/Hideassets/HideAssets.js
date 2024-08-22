@@ -15,21 +15,25 @@ const HideAssets = () => {
   };
 
   return (
+    <div className={styles.pageWrapper}>
     <Box
       sx={{
         backgroundColor: '#000',
         color: '#fff',
-        height: '550px',
         display: 'flex',
         flexDirection: 'column',
-        width: '320px',
         margin:'0 auto',
+        width: '100%',
+        maxWidth: '428px',
+        height:'auto', // Adjust height for additional content
+        minHeight: '100vh' ,
+        padding:'20px',
       }}
       
     >
       {/* Header with Back Arrow */}
       <Box sx={{ display: 'flex', alignItems: 'center', p: 2 }}>
-        <IconButton color="inherit" href="/Manageprofile/profilesidebar">
+        <IconButton color="inherit" href="/ManageProfile/ProfileSidebar">
           <FaArrowLeft className={styles.footerIcon} />
         </IconButton>
         <Typography variant="h6" sx={{ ml: 1 }}>
@@ -69,7 +73,13 @@ const HideAssets = () => {
             <Typography variant="h6" sx={{ mb: 2 }}>
               Add crypto to get started
             </Typography>
-            <Button variant="contained" color="primary" sx={{ width: '80%' }}>
+            <Button
+              className={styles.button}
+              variant="contained"
+              // color="primary"
+              fullWidth
+              sx={{ mt: 1, mb: 1 }}
+            >
               Add crypto
             </Button>
           </>
@@ -89,7 +99,13 @@ const HideAssets = () => {
             <Typography variant="h6" sx={{ mb: 2 }}>
               Want to buy an NFT?
             </Typography>
-            <Button variant="contained" color="primary" sx={{ width: '80%' }}>
+            <Button
+              className={styles.button}
+              variant="contained"
+              // color="primary"
+              fullWidth
+              sx={{ mt: 1, mb: 1 }}
+            >
               Add crypto to your wallet
             </Button>
           </>
@@ -130,6 +146,7 @@ const HideAssets = () => {
         </Link> */}
       {/* </Box> */}
     </Box>
+    </div>
   );
 };
 

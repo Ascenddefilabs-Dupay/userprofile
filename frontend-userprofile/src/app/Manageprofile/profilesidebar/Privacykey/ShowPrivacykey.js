@@ -14,9 +14,10 @@ const ShowRecoveryPhrase = () => {
   };
 
   return (
+    <div className={styles.pageWrapper}>
     <Box className={styles.container}>
       <Container component="main" className={styles.mainContent}>
-        <IconButton color="inherit" href="/Manageprofile/profilesidebar">
+        <IconButton color="inherit" href="/ManageProfile/ProfileSidebar">
           <FaArrowLeft className={styles.footerIcon} />
         </IconButton>
         <Typography variant="h5" sx={{ mt: 3, mb: 1 }}>
@@ -56,8 +57,9 @@ const ShowRecoveryPhrase = () => {
           className={styles.checkboxLabel}
         />
         <Button
+          className={styles.button}
           variant="contained"
-          color="primary"
+          // color="primary"
           fullWidth
           sx={{ mt: 1, mb: 1 }}
         >
@@ -65,6 +67,7 @@ const ShowRecoveryPhrase = () => {
         </Button>
       </Container>
     </Box>
+    </div>
   );
 };
 

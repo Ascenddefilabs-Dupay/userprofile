@@ -71,8 +71,10 @@ const StyledContainer = styled(Container)({
   backgroundColor: '#000000',
   borderRadius: '8px',
   color: '#FFFFFF',
-  width:'320px',
-  height:'550px' // Adjust height for additional content
+  width: '428px',
+  height:'auto', // Adjust height for additional content
+  minHeight: '100vh' ,
+  padding:'20px',
 });
 
 
@@ -239,10 +241,11 @@ const UserProfile = () => {
   });
   
   return (
+    <div className={styles.pageWrapper}>
     <Container maxWidth="md">
       <StyledContainer>
         <header style={styles.header}>
-            <Link href="/Manageprofile">
+            <Link href="/ManageProfile">
               <BackArrow />
 
             </Link>
@@ -285,6 +288,7 @@ const UserProfile = () => {
         
       </StyledContainer>
     </Container>
+    </div>
   );
 };
 

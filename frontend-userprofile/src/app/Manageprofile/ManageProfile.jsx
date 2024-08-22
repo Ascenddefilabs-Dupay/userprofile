@@ -4,6 +4,11 @@ import Link from 'next/link';
 import { FaArrowLeft, FaClock, FaFileAlt, FaCog } from 'react-icons/fa';
 import { Container, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
+import { ArrowForwardIos, Circle, Info } from '@mui/icons-material';
+import { Button } from '@mui/material';
+import { useRouter } from 'next/navigation';
+
+
 
 const StyledContainer = styled(Container)({
   display: 'flex',
@@ -13,10 +18,36 @@ const StyledContainer = styled(Container)({
   backgroundColor: '#000000',
   borderRadius: '8px',
   color: '#FFFFFF',
-  width:'320px',
-  height:'550px' // Adjust height for additional content
+  width:'428px',
+  height:'auto' ,
+  minHeight:'100vh',// // Adjust height for additional content
+  padding : '20px',
 });
+const styles = {
+  menuList: {
+    flex: 1,
+    overflowY: 'auto', // Allow vertical scrolling
+    marginTop: '20px',
 
+    // Hide scrollbars for WebKit browsers (Chrome, Safari)
+    '::-webkit-scrollbar': {
+      display: 'none', // Hide scrollbar
+    },
+
+    // Hide scrollbars for Firefox
+    scrollbarWidth: 'none', // Hide scrollbar
+
+    // Hide scrollbars for Internet Explorer and Edge
+    '-msOverflowStyle': 'none', // Hide scrollbar
+  }
+};
+const ButtonLink = styled(Button)({
+  display: 'flex',
+  justifyContent: 'space-between',
+  width: '100%',
+  textTransform: 'none',
+  backgroundColor:"gray"
+});
 const Header = styled('header')({
   display: 'flex',
   alignItems: 'center',
@@ -79,15 +110,27 @@ const FooterItem = styled('div')({
   color: '#FFFFFF',
   cursor: 'pointer',
 });
+const container = {
+  
+    display: 'flex',
+    justifyContent: 'center',
+    width:'400px',
+    alignItems: 'center',
+    height: 'auto',
+    backgroundColor: 'red',
+
+};
 const handleLeftArrowClick = () => {
-  window.location.href = 'http://localhost:3003/Crypto_Wallet/Dashboard';
+  window.location.href = 'http://localhost:3003/Dashboard';
 };
 
 const ManageProfile = () => {
+  const router = useRouter();
   return (
+    <div className={container}>
     <StyledContainer maxWidth="md">
       <Header>
-        <Link href="/VeiwProfile">
+        <Link href="/ViewProfile">
           <BackArrow onClick={handleLeftArrowClick}/>
         </Link>
         <MenuTitle>Manage Profile</MenuTitle>
@@ -95,24 +138,40 @@ const ManageProfile = () => {
       <Nav>
         <NavList>
           <NavItem>
-            <NavLink href="/Manageprofile/EditProfile">
-              Edit Profile Details <Arrow/> 
+            <NavLink href="/ManageProfile/EditProfile">
+              Edit Profile Details 
+              <ArrowForwardIos
+                className={styles.menuLink}
+                style={{ fontSize: '1rem', marginLeft: '130px' }} // Add margin-left to create space
+                onClick={() => router.push('/ManageProfile/EditProfile')}
+              />
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/Manageprofile/ManagePrivacy">
-              Manage Privacy <Arrow />
+            <NavLink href="/ManageProfile/ManagePrivacy">
+              Manage Privacy 
+              <ArrowForwardIos
+                className={styles.menuLink}
+                style={{ fontSize: '1rem', marginLeft: '140px' }} // Add margin-left to create space
+                onClick={() => router.push('/ManageProfile/ManagePrivacy')}
+              />
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/Manageprofile/ViewProfile">
-              View Your Profile <Arrow /> 
+            <NavLink href="/ManageProfile/ViewProfile">
+              View Your Profile 
+              <ArrowForwardIos
+                className={styles.menuLink}
+                style={{ fontSize: '1rem', marginLeft: '135px' }} // Add margin-left to create space
+                onClick={() => router.push('/ManageProfile/ViewProfile')}
+              /> 
             </NavLink>
           </NavItem>
         </NavList>
       </Nav>
       
     </StyledContainer>
+    </div>
   );
 };
 
