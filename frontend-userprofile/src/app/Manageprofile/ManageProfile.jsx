@@ -52,7 +52,9 @@ const Header = styled('header')({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
-  marginBottom: '1rem',
+  marginBottom: '-0.5rem',
+  height: '10px',
+  size: '10px',
 });
 
 const BackArrow = styled(FaArrowLeft)({
@@ -117,7 +119,7 @@ const container = {
     width:'400px',
     alignItems: 'center',
     height: 'auto',
-    backgroundColor: 'red',
+    backgroundColor: 'white',
 
 };
 const handleLeftArrowClick = () => {
@@ -142,7 +144,7 @@ const ManageProfile = () => {
               Edit Profile Details 
               <ArrowForwardIos
                 className={styles.menuLink}
-                style={{ fontSize: '1rem', marginLeft: '130px' }} // Add margin-left to create space
+                style={{ fontSize: '1rem', marginLeft: '125px' }} // Add margin-left to create space
                 onClick={() => router.push('/ManageProfile/EditProfile')}
               />
             </NavLink>
