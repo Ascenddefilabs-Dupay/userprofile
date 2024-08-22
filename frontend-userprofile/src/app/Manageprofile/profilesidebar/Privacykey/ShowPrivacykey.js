@@ -15,10 +15,10 @@ const ShowRecoveryPhrase = () => {
 
   return (
     <div className={styles.pageWrapper}>
-    <Box className={styles.container}>
+    <Box sx={{ height: '15px'}} className={styles.container} >
       <Container component="main" className={styles.mainContent}>
         <IconButton color="inherit" href="/ManageProfile/ProfileSidebar">
-          <FaArrowLeft className={styles.footerIcon} />
+          <FaArrowLeft style={{position: 'relative' ,right:'10px'}} className={styles.footerIcon} />
         </IconButton>
         <Typography variant="h5" sx={{ mt: 3, mb: 1 }}>
           Show private key

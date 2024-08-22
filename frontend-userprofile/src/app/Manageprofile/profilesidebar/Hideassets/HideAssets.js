@@ -32,9 +32,9 @@ const HideAssets = () => {
       
     >
       {/* Header with Back Arrow */}
-      <Box sx={{ display: 'flex', alignItems: 'center', p: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', p: 2  , height: '15px'}}>
         <IconButton color="inherit" href="/ManageProfile/ProfileSidebar">
-          <FaArrowLeft className={styles.footerIcon} />
+          <FaArrowLeft style={{position: 'relative' ,right:'15px'}} className={styles.footerIcon} />
         </IconButton>
         <Typography variant="h6" sx={{ ml: 1 }}>
           Hide assets
@@ -50,7 +50,7 @@ const HideAssets = () => {
         indicatorColor="primary"
         sx={{ borderBottom: 1, borderColor: 'divider' }}
       >
-        <Tab label="Crypto" />
+        <Tab label="Dupay" />
         <Tab label="NFTs" />
       </Tabs>
 
@@ -64,7 +64,7 @@ const HideAssets = () => {
             </Box> */}
             <Box sx={{ mb: 2 }}>
               <Image
-                src="/crypto.image.svg" // Update this to the correct image path
+                src="/Dupay.image.png" // Update this to the correct image path
                 alt="NFT Image"
                 width={250}
                 height={250}
