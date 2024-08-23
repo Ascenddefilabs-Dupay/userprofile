@@ -7,6 +7,6 @@ django-cockroachdb==5.0
 rest_framework =3.14.0
 corsheaders =3.14.0
 cloudinary
-cloudinary_storage
+django-cloudinary-storage==0.3.0
 npm install react-toastify
 axios
