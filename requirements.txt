@@ -8,5 +8,3 @@ rest_framework =3.14.0
 corsheaders =3.14.0
 cloudinary
 django-cloudinary-storage==0.3.0
-npm install react-toastify
-axios
