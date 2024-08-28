@@ -18,5 +18,5 @@ router.register(r'profile',CustomUserViewSet,basename="myProfile")
 urlpatterns = [
     path('',include(router.urls)),
     # path('profile/<pk>/', UserProfileView.as_view())
-    path('api/update-privacy/<str:user_id>/', update_profile_privacy, name='update_profile_privacy'),
+    path('userprofileapi/update-privacy/<str:user_id>/', update_profile_privacy, name='update_profile_privacy'),
 ]
