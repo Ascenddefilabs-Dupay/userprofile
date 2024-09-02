@@ -1,10 +1,7 @@
-psycopg2-binary
-django==5.0.1
+psycopg2-binary==2.9.9
+django==5.0.7
 django-cockroachdb==5.0
-psycopg2-binary
-django==5.0.1
-django-cockroachdb==5.0
-rest_framework =3.14.0
-corsheaders =3.14.0
-cloudinary
+djangorestframework==3.14.0
+django-cors-headers==4.4.0
+cloudinary==1.41.0
 django-cloudinary-storage==0.3.0
