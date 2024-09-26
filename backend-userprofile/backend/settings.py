@@ -28,7 +28,12 @@ SECRET_KEY = 'django-insecure-v)j0r+kp99o#$5%f#*b!s_9i%f39=)zsx#=+i4d#6j3c4c#*d=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["userprofile-rcfpsxcera-uc.a.run.app"]
+# ALLOWED_HOSTS = ["userprofile-rcfpsxcera-uc.a.run.app"]
+ALLOWED_HOSTS = [
+    'userprofile-ind-255574993735.asia-south1.run.app',
+    # You can add more allowed hosts here if needed
+]
+
 
 
 # Application definition
