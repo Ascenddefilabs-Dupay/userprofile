@@ -1,12 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import ProjectViewSet,CustomUserViewSet,FetchQRCodeView
+from .views import CustomUserViewSet,FetchQRCodeView
 from .views import update_profile_privacy
 
 
 router = DefaultRouter()
 
-router.register(r'projects',ProjectViewSet)
 router.register(r'profile',CustomUserViewSet,basename="myProfile")
 
 
