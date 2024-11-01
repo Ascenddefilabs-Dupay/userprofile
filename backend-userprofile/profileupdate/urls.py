@@ -18,5 +18,5 @@ urlpatterns = [
     path('',include(router.urls)),
     # path('profile/<pk>/', UserProfileView.as_view())
     path('userprofileapi/update-privacy/<str:user_id>/', update_profile_privacy, name='update_profile_privacy'),
-    path('fetch-qr-code/', FetchQRCodeView.as_view(), name='fetch_qr_code'),
+    # path('fetch-qr-code/', FetchQRCodeView.as_view(), name='fetch_qr_code'),
 ]
