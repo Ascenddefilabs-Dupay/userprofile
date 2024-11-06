@@ -14,9 +14,12 @@ from pathlib import Path
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env() 
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,10 +32,11 @@ SECRET_KEY = 'django-insecure-v)j0r+kp99o#$5%f#*b!s_9i%f39=)zsx#=+i4d#6j3c4c#*d=
 DEBUG = True
 
 # ALLOWED_HOSTS = ["userprofile-rcfpsxcera-uc.a.run.app"]
-ALLOWED_HOSTS = [
-    'userprofile-ind-255574993735.asia-south1.run.app',
+# ALLOWED_HOSTS = [
+    # 'userprofile-ind-255574993735.asia-south1.run.app',
     # You can add more allowed hosts here if needed
-]
+# ]
+ALLOWED_HOSTS = ["*"]
 
 
 
@@ -70,6 +74,7 @@ ROOT_URLCONF = 'backend.urls'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    'https://dupay.biz',
 ]
 
 
@@ -100,8 +105,8 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_cockroachdb',
-        'NAME': 'dupay',
-        'USER': 'dupay',
+        'NAME': env('DB_NAME'),   
+        'USER': 'dupay',  
         'PASSWORD': 'lPVRIuSyVCJqfmghd7ckBw',
         'HOST': 'chill-dibbler-5989.7s5.aws-ap-south-1.cockroachlabs.cloud',
         'PORT': '26257',
